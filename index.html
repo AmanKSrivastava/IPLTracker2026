@@ -1,59 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Leaderboard & Match History</title>
+    <title>IPL 2026 Fantasy Dashboard</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="dashboard-header">
-      <h1>Dream 11 2025 Tracker</h1>
-    </div>
-    <h1 class="table-header">Leaderboard</h1>
-    <table id="leaderboard">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th data-key="name">Player</th>
-          <th data-key="totalPoints">Total Points</th>
-          <th data-key="matchesPlayed">Matches Played</th>
-          <th data-key="avgPoints">Avg Points</th>
-          <th data-key="totalWinnings">Total Winnings</th>
-          <th data-key="entryFeePaid">Entry Fee Paid</th>
-          <th data-key="netProfit">Net Profit</th>
-          <th data-key="matchesWon">Matches Won</th>
-          <th data-key="maxPointsEver">Max Points Ever</th>
-          <th data-key="winPercentage">Win %</th>
-        </tr>
-      </thead>
-      <tbody id="leaderboard-body">
-        <!-- Data will be inserted here dynamically -->
-      </tbody>
-    </table>
+    <div class="page-shell">
+      <header class="hero card">
+        <div class="hero-badge">IPL 2026 • Fantasy Tracker</div>
+        <h1>🏏 Fantasy IPL Dashboard</h1>
+        <p class="hero-text">
+          Track leaderboard swings, settlements, and match dates in a cleaner,
+          more modern responsive layout.
+        </p>
+        <div class="hero-strip">
+          <span id="status" class="status-pill">Loading `data.json`...</span>
+        </div>
+      </header>
 
-    <h1 class="table-header">Match History</h1>
-    <table id="matchHistory">
-      <thead>
-        <tr>
-          <th data-key="date">Date</th>
-          <th data-key="match_no">Match No</th>
-          <th data-key="match_between">Match Between</th>
-          <th data-key="winner">Winner</th>
-          <th data-key="Abhishek">Abhishek</th>
-          <th data-key="Aman">Aman</th>
-          <th data-key="Vikki">Vikki</th>
-          <th data-key="Vasu">Vasu</th>
-          <th data-key="Nabh">Nabh</th>
-        </tr>
-      </thead>
-      <tbody id="match-history-body">
-        <!-- Data will be inserted here dynamically -->
-      </tbody>
-    </table>
+      <section class="summary-grid">
+        <div class="summary-card accent-cyan">
+          <span class="summary-label">Matches</span>
+          <strong id="totalMatches">0</strong>
+        </div>
+        <div class="summary-card accent-violet">
+          <span class="summary-label">Players</span>
+          <strong id="totalPlayers">0</strong>
+        </div>
+        <div class="summary-card accent-orange">
+          <span class="summary-label">Leader</span>
+          <strong id="topLeader">-</strong>
+          <small id="topLeaderAmount">₹0</small>
+        </div>
+        <div class="summary-card accent-green">
+          <span class="summary-label">Entry Fee</span>
+          <strong id="entryFeeDisplay">₹0</strong>
+        </div>
+      </section>
 
-    <div id="pagination">
-      <!-- Pagination buttons will be added dynamically -->
+      <section class="content-grid">
+        <div class="card panel">
+          <div class="section-title">
+            <h2>🏆 Leaderboard</h2>
+            <p>Net balance after all tracked matches</p>
+          </div>
+          <div id="leaderboard"></div>
+        </div>
+
+        <div class="card panel">
+          <div class="section-title">
+            <h2>💸 Settlement</h2>
+            <p>Quick payment summary</p>
+          </div>
+          <div id="settlement"></div>
+        </div>
+      </section>
+
+      <section class="card panel">
+        <div class="section-title">
+          <h2>📈 Total Player Points</h2>
+          <p>Overall fantasy points scored across all tracked matches</p>
+        </div>
+        <div id="playerTotals" class="table-wrap"></div>
+      </section>
+
+      <section class="card panel">
+        <div class="matches-header">
+          <div class="section-title">
+            <h2>📅 Match Timeline</h2>
+            <p>
+              Paginated cards with dates, venue, winner, and all player points
+            </p>
+          </div>
+          <div id="pagination" class="pagination"></div>
+        </div>
+        <div id="matches" class="matches-grid"></div>
+      </section>
+
+      <footer class="footer">
+        Revamped fantasy dashboard • responsive UI • IPL 2026-style schedule
+      </footer>
     </div>
 
     <script src="script.js"></script>
