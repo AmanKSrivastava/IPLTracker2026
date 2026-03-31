@@ -9,10 +9,19 @@ const topLeaderEl = document.getElementById("topLeader");
 const topLeaderAmountEl = document.getElementById("topLeaderAmount");
 const entryFeeDisplayEl = document.getElementById("entryFeeDisplay");
 const playerTotalsEl = document.getElementById("playerTotals");
+const completedOnlyToggleEl = document.getElementById("completedOnlyToggle");
 
+let dashboardData = null;
 let allMatches = [];
 let currentPage = 1;
-const matchesPerPage = 2;
+let showCompletedOnly = completedOnlyToggleEl?.checked ?? true;
+const matchesPerPage = 4;
+
+completedOnlyToggleEl?.addEventListener("change", () => {
+  showCompletedOnly = completedOnlyToggleEl.checked;
+  currentPage = 1;
+  updateDashboard();
+});
 
 initDashboard();
 
@@ -26,18 +35,9 @@ async function initDashboard() {
     }
 
     const rawData = await response.json();
-    const data = normalizeData(rawData);
-    const result = processMatches(data);
-
-    allMatches = [...result.matches].sort((a, b) => sortByDate(a.date, b.date));
-
-    renderSummary(data, result.balances, allMatches);
-    renderLeaderboard(result.balances);
-    renderPlayerTotals(calculatePlayerTotals(data.players, data.matches));
-    renderSettlement(result.balances);
-    renderMatches();
-
-    statusEl.textContent = `Loaded ${allMatches.length} matches from data.json.`;
+    dashboardData = normalizeData(rawData);
+    showCompletedOnly = completedOnlyToggleEl?.checked ?? true;
+    updateDashboard();
   } catch (error) {
     console.error("Error loading dashboard data:", error);
     statusEl.innerHTML =
@@ -57,6 +57,32 @@ async function initDashboard() {
   }
 }
 
+function updateDashboard() {
+  if (!dashboardData) {
+    return;
+  }
+
+  const result = processMatches(dashboardData, {
+    completedOnly: showCompletedOnly,
+  });
+
+  allMatches = [...result.matches].sort((a, b) => sortByDate(a.date, b.date));
+
+  renderSummary(dashboardData, result);
+  renderLeaderboard(result.balances, result.countedMatches.length > 0);
+  renderPlayerTotals(
+    calculatePlayerTotals(dashboardData.players, result.countedMatches),
+  );
+  renderSettlement(result.balances, result.countedMatches.length > 0);
+  renderMatches();
+
+  const modeText = showCompletedOnly
+    ? "completed matches only"
+    : "all scheduled matches";
+
+  statusEl.textContent = `Loaded ${result.totalScheduled} scheduled matches • ${result.completedCount} completed • scoring uses ${modeText}.`;
+}
+
 function normalizeData(rawData) {
   if (Array.isArray(rawData)) {
     const playerSet = new Set();
@@ -70,17 +96,26 @@ function normalizeData(rawData) {
     return {
       entryFee: Number(rawData.entryFee ?? rawData.entry_fee ?? 50),
       players: Array.from(playerSet),
-      matches: rawData.map((match) => ({
-        match:
-          match.match ||
-          match.match_between ||
-          `Match ${match.match_no || ""}`.trim(),
-        date: match.date || "",
-        time: match.time || "7:30 PM IST",
-        venue: match.venue || "Venue to be updated",
-        entryFee: Number(match.entryFee ?? match.entry_fee ?? 50),
-        scores: match.scores || match.players || {},
-      })),
+      matches: rawData.map((match, index) => {
+        const scores = match.scores || match.players || {};
+
+        return {
+          matchNo: Number(match.matchNo ?? match.match_no ?? index + 1),
+          match:
+            match.match ||
+            match.match_between ||
+            `Match ${match.matchNo ?? match.match_no ?? index + 1}`,
+          date: match.date || "",
+          time: match.time || "7:30 PM IST",
+          venue: match.venue || "Venue to be updated",
+          completed:
+            typeof match.completed === "boolean"
+              ? match.completed
+              : hasScoreData(scores),
+          entryFee: Number(match.entryFee ?? match.entry_fee ?? 50),
+          scores,
+        };
+      }),
     };
   }
 
@@ -96,92 +131,127 @@ function normalizeData(rawData) {
             ),
           ),
         ),
-      matches: rawData.matches.map((match) => ({
-        match: match.match || match.match_between || "Match",
-        date: match.date || "",
-        time: match.time || "7:30 PM IST",
-        venue: match.venue || "Venue to be updated",
-        entryFee: Number(
-          match.entryFee ??
-            match.entry_fee ??
-            rawData.entryFee ??
-            rawData.entry_fee ??
-            50,
-        ),
-        scores: match.scores || match.players || {},
-      })),
+      matches: rawData.matches.map((match, index) => {
+        const scores = match.scores || match.players || {};
+
+        return {
+          matchNo: Number(match.matchNo ?? match.match_no ?? index + 1),
+          match:
+            match.match ||
+            match.match_between ||
+            `Match ${match.matchNo ?? match.match_no ?? index + 1}`,
+          date: match.date || "",
+          time: match.time || "7:30 PM IST",
+          venue: match.venue || "Venue to be updated",
+          completed:
+            typeof match.completed === "boolean"
+              ? match.completed
+              : hasScoreData(scores),
+          entryFee: Number(
+            match.entryFee ??
+              match.entry_fee ??
+              rawData.entryFee ??
+              rawData.entry_fee ??
+              50,
+          ),
+          scores,
+        };
+      }),
     };
   }
 
   throw new Error("Unsupported JSON format in data.json");
 }
 
-function processMatches(data) {
+function hasScoreData(scores = {}) {
+  return Object.values(scores).some((score) => Number(score) > 0);
+}
+
+function processMatches(data, { completedOnly = true } = {}) {
   const balances = Object.fromEntries(
     data.players.map((player) => [player, 0]),
   );
 
+  let completedCount = 0;
+
   const processedMatches = data.matches.map((match, index) => {
-    const activePlayers = Object.entries(match.scores).filter(
+    const scores = match.scores || {};
+    const activePlayers = Object.entries(scores).filter(
       ([, score]) => Number(score) > 0,
     );
     const entryFee = Number(match.entryFee ?? data.entryFee ?? 50);
+    const completed = Boolean(match.completed);
 
-    if (activePlayers.length === 0) {
-      return {
-        ...match,
-        id: index + 1,
-        entryFee,
-        winner: "-",
-        winningScore: 0,
-        activePlayers: [],
-      };
+    if (completed) {
+      completedCount += 1;
     }
 
-    const [winner, winningScore] = activePlayers.reduce((best, current) =>
-      Number(current[1]) > Number(best[1]) ? current : best,
-    );
+    let winner = completed ? "Pending" : "Upcoming";
+    let winningScore = 0;
+    let totalPool = 0;
 
-    const totalPool = entryFee * activePlayers.length;
+    if (activePlayers.length > 0) {
+      const topScore = activePlayers.reduce((best, current) =>
+        Number(current[1]) > Number(best[1]) ? current : best,
+      );
 
-    activePlayers.forEach(([player]) => {
-      if (player === winner) {
-        balances[player] += totalPool - entryFee;
-      } else {
-        balances[player] -= entryFee;
-      }
-    });
+      winner = topScore[0];
+      winningScore = Number(topScore[1]);
+      totalPool = entryFee * activePlayers.length;
+    }
+
+    const counted = activePlayers.length > 0 && (!completedOnly || completed);
+
+    if (counted) {
+      activePlayers.forEach(([player]) => {
+        if (player === winner) {
+          balances[player] += totalPool - entryFee;
+        } else {
+          balances[player] -= entryFee;
+        }
+      });
+    }
 
     return {
       ...match,
-      id: index + 1,
+      id: match.matchNo ?? index + 1,
+      matchNo: match.matchNo ?? index + 1,
+      completed,
+      counted,
       entryFee,
       totalPool,
       winner,
-      winningScore: Number(winningScore),
+      winningScore,
       activePlayers: activePlayers.map(([player]) => player),
     };
   });
 
-  return { balances, matches: processedMatches };
+  return {
+    balances,
+    matches: processedMatches,
+    countedMatches: processedMatches.filter((match) => match.counted),
+    completedCount,
+    totalScheduled: processedMatches.length,
+  };
 }
 
-function renderSummary(data, balances, matches) {
-  const sorted = Object.entries(balances).sort((a, b) => b[1] - a[1]);
+function renderSummary(data, result) {
+  const sorted = Object.entries(result.balances).sort((a, b) => b[1] - a[1]);
+  const hasCountedMatches = result.countedMatches.length > 0;
   const [leaderName, leaderAmount] = sorted[0] || ["-", 0];
-  const firstEntryFee = matches[0]?.entryFee ?? data.entryFee ?? 0;
 
-  totalMatchesEl.textContent = String(matches.length);
+  totalMatchesEl.textContent = `${result.countedMatches.length}/${result.totalScheduled}`;
   totalPlayersEl.textContent = String(data.players.length);
-  topLeaderEl.textContent = leaderName;
-  topLeaderAmountEl.textContent = formatCurrency(leaderAmount);
-  entryFeeDisplayEl.textContent = formatCurrency(firstEntryFee);
+  topLeaderEl.textContent = hasCountedMatches ? leaderName : "Pending";
+  topLeaderAmountEl.textContent = hasCountedMatches
+    ? formatCurrency(leaderAmount)
+    : "No scored match";
+  entryFeeDisplayEl.textContent = formatCurrency(data.entryFee ?? 0);
 }
 
-function renderLeaderboard(balances) {
+function renderLeaderboard(balances, hasCountedMatches) {
   const sorted = Object.entries(balances).sort((a, b) => b[1] - a[1]);
-
-  leaderboardEl.innerHTML = sorted
+  const rows = sorted
     .map(
       ([name, balance], index) => `
         <div class="leader-row">
@@ -189,9 +259,7 @@ function renderLeaderboard(balances) {
             <span class="rank-badge">${index + 1}</span>
             <div>
               <span class="leader-name">${name}</span>
-             <span class="leader-note">
-  ${balance === 0 ? "Neutral" : balance > 0 ? "In profit" : "Needs recovery"}
-</span>
+              <span class="leader-note">${balance === 0 ? "Neutral" : balance > 0 ? "In profit" : "Needs recovery"}</span>
             </div>
           </div>
           <span class="amount ${balance >= 0 ? "positive" : "negative"}">${formatCurrency(balance)}</span>
@@ -199,6 +267,12 @@ function renderLeaderboard(balances) {
       `,
     )
     .join("");
+
+  leaderboardEl.innerHTML =
+    (hasCountedMatches
+      ? ""
+      : '<div class="empty-state">Completed scores will appear here as matches finish.</div>') +
+    rows;
 }
 
 function calculatePlayerTotals(players, matches) {
@@ -298,7 +372,13 @@ function calculateSettlement(balances) {
   return transactions;
 }
 
-function renderSettlement(balances) {
+function renderSettlement(balances, hasCountedMatches) {
+  if (!hasCountedMatches) {
+    settlementEl.innerHTML =
+      '<div class="settlement">Waiting for completed match scores.</div>';
+    return;
+  }
+
   const transactions = calculateSettlement(balances);
 
   settlementEl.innerHTML =
@@ -333,12 +413,16 @@ function renderMatches() {
   matchesEl.innerHTML = visibleMatches
     .map(
       (match) => `
-        <article class="match-card">
-          <div class="match-date">${formatDate(match.date)}</div>
-          <h3>${match.match}</h3>
+        <article class="match-card ${match.completed ? "is-completed" : "is-upcoming"}">
+          <div class="match-topline">
+            <div class="match-date">${formatDate(match.date)}</div>
+            <span class="chip status-chip ${match.completed ? "is-completed" : "is-upcoming"}">${match.completed ? "Completed" : "Upcoming"}</span>
+          </div>
+          <h3>#${match.matchNo} • ${match.match}</h3>
           <div class="match-chip-row">
             <span class="chip">${match.time || "7:30 PM IST"}</span>
             <span class="chip">${match.venue || "Venue to be updated"}</span>
+            <span class="chip">${match.counted ? "Points counted" : "Not counted yet"}</span>
           </div>
           <div class="match-stats">
             <div class="stat-box">
@@ -366,7 +450,15 @@ function renderMatches() {
 }
 
 function renderPointsBreakdown(scores, winner) {
-  return Object.entries(scores || {})
+  const entries = Object.entries(scores || {}).filter(
+    ([, score]) => Number(score) > 0,
+  );
+
+  if (!entries.length) {
+    return '<div class="empty-state">Scores will update after the match is completed.</div>';
+  }
+
+  return entries
     .sort((a, b) => Number(b[1]) - Number(a[1]))
     .map(
       ([player, score]) => `
