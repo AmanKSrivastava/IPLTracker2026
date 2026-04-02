@@ -83,8 +83,14 @@
       "date": "2026-04-02",
       "time": "7:30 PM IST",
       "venue": "Eden Gardens, Kolkata",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 762,
+        "Aman": 873,
+        "Vikki": 652,
+        "Vasu": 0
+      }
     },
     {
       "matchNo": 7,

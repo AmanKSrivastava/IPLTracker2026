@@ -288,7 +288,7 @@ function renderLeaderboard(balances, hasCountedMatches) {
 
 function calculatePlayerTotals(players, matches) {
   const totals = Object.fromEntries(
-    players.map((player) => [player, { total: 0, played: 0, best: 0 }]),
+    players.map((player) => [player, { total: 0, played: 0, best: 0, wins: 0 }]),
   );
 
   matches.forEach((match) => {
@@ -296,7 +296,7 @@ function calculatePlayerTotals(players, matches) {
       const numericScore = Number(score || 0);
 
       if (!totals[player]) {
-        totals[player] = { total: 0, played: 0, best: 0 };
+        totals[player] = { total: 0, played: 0, best: 0, wins: 0 };
       }
 
       totals[player].total += numericScore;
@@ -304,6 +304,9 @@ function calculatePlayerTotals(players, matches) {
         totals[player].played += 1;
       }
       totals[player].best = Math.max(totals[player].best, numericScore);
+      if (player === match.winner) {
+        totals[player].wins += 1;
+      }
     });
   });
 
@@ -313,6 +316,7 @@ function calculatePlayerTotals(players, matches) {
       total: stats.total,
       played: stats.played,
       best: stats.best,
+      wins: stats.wins,
       average: stats.played ? stats.total / stats.played : 0,
     }))
     .sort((a, b) => b.total - a.total);
@@ -328,6 +332,7 @@ function renderPlayerTotals(players) {
           <th>Total Points</th>
           <th>Avg/Match</th>
           <th>Best Score</th>
+          <th>Wins</th>
         </tr>
       </thead>
       <tbody>
@@ -340,6 +345,7 @@ function renderPlayerTotals(players) {
                 <td>${formatPoints(player.total)}</td>
                 <td>${formatPoints(player.average)}</td>
                 <td>${formatPoints(player.best)}</td>
+                <td>${player.wins}</td>
               </tr>
             `,
           )
