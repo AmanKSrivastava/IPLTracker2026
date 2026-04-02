@@ -66,7 +66,18 @@ function updateDashboard() {
     completedOnly: showCompletedOnly,
   });
 
-  allMatches = [...result.matches].sort((a, b) => sortByDate(a.date, b.date));
+  allMatches = [...result.matches].sort((a, b) => {
+    if (a.completed && !b.completed) return -1;
+    if (!a.completed && b.completed) return 1;
+    // both same status
+    if (a.completed) {
+      // both completed, sort by date descending (most recent first)
+      return sortByDate(b.date, a.date);
+    } else {
+      // both upcoming, sort by date ascending
+      return sortByDate(a.date, b.date);
+    }
+  });
 
   renderSummary(dashboardData, result);
   renderLeaderboard(result.balances, result.countedMatches.length > 0);
