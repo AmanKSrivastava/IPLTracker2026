@@ -68,8 +68,14 @@
       "date": "2026-04-01",
       "time": "7:30 PM IST",
       "venue": "Ekana Cricket Stadium, Lucknow",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 552.5,
+        "Abhishek": 446.5,
+        "Aman": 499,
+        "Vikki": 630,
+        "Vasu": 0
+      }
     },
     {
       "matchNo": 6,
