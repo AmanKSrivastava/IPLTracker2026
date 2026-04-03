@@ -288,7 +288,10 @@ function renderLeaderboard(balances, hasCountedMatches) {
 
 function calculatePlayerTotals(players, matches) {
   const totals = Object.fromEntries(
-    players.map((player) => [player, { total: 0, played: 0, best: 0, wins: 0 }]),
+    players.map((player) => [
+      player,
+      { total: 0, played: 0, best: 0, wins: 0 },
+    ]),
   );
 
   matches.forEach((match) => {
