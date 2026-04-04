@@ -98,8 +98,14 @@
       "date": "2026-04-03",
       "time": "7:30 PM IST",
       "venue": "MA Chidambaram Stadium, Chennai",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 627,
+        "Abhishek": 813.5,
+        "Aman": 578,
+        "Vikki": 745.5,
+        "Vasu": 735.5
+      }
     },
     {
       "matchNo": 8,
