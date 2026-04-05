@@ -1,6 +1,6 @@
 {
   "entryFee": 50,
-  "players": ["Nabh", "Abhishek", "Aman", "Vikki", "Vasu"],
+  "players": ["Nabh", "Abhishek", "Aman", "Vikki", "Vasu", "Akku"],
   "matches": [
     {
       "matchNo": 1,
@@ -14,7 +14,8 @@
         "Abhishek": 775.5,
         "Aman": 702,
         "Vikki": 730.5,
-        "Vasu": 0
+        "Vasu": 0,
+        "Akku": 0
       }
     },
     {
@@ -29,7 +30,8 @@
         "Abhishek": 945,
         "Aman": 849,
         "Vikki": 810,
-        "Vasu": 850
+        "Vasu": 850,
+        "Akku": 0
       }
     },
     {
@@ -44,7 +46,8 @@
         "Abhishek": 450,
         "Aman": 452,
         "Vikki": 656,
-        "Vasu": 0
+        "Vasu": 0,
+        "Akku": 0
       }
     },
     {
@@ -59,7 +62,8 @@
         "Abhishek": 689.5,
         "Aman": 507.5,
         "Vikki": 572,
-        "Vasu": 0
+        "Vasu": 0,
+        "Akku": 0
       }
     },
     {
@@ -74,7 +78,8 @@
         "Abhishek": 446.5,
         "Aman": 499,
         "Vikki": 630,
-        "Vasu": 0
+        "Vasu": 0,
+        "Akku": 0
       }
     },
     {
@@ -89,7 +94,8 @@
         "Abhishek": 762,
         "Aman": 873,
         "Vikki": 652,
-        "Vasu": 0
+        "Vasu": 0,
+        "Akku": 0
       }
     },
     {
@@ -104,7 +110,8 @@
         "Abhishek": 813.5,
         "Aman": 578,
         "Vikki": 745.5,
-        "Vasu": 735.5
+        "Vasu": 735.5,
+        "Akku": 0
       }
     },
     {
@@ -119,7 +126,8 @@
         "Abhishek": 762,
         "Aman": 516,
         "Vikki": 530.5,
-        "Vasu": 472.5
+        "Vasu": 472.5,
+        "Akku": 0
       }
     },
     {
@@ -134,7 +142,8 @@
         "Abhishek": 841.5,
         "Aman": 799.5,
         "Vikki": 838,
-        "Vasu": 866
+        "Vasu": 866,
+        "Akku": 0
       }
     },
     {

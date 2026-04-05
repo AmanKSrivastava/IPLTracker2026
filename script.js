@@ -9,6 +9,7 @@ const topLeaderEl = document.getElementById("topLeader");
 const topLeaderAmountEl = document.getElementById("topLeaderAmount");
 const entryFeeDisplayEl = document.getElementById("entryFeeDisplay");
 const playerTotalsEl = document.getElementById("playerTotals");
+const winsTableEl = document.getElementById("winsTable");
 const completedOnlyToggleEl = document.getElementById("completedOnlyToggle");
 
 let dashboardData = null;
@@ -84,6 +85,7 @@ function updateDashboard() {
   renderPlayerTotals(
     calculatePlayerTotals(dashboardData.players, result.countedMatches),
   );
+  renderWinsTable(result.matches);
   renderSettlement(result.balances, result.countedMatches.length > 0);
   renderMatches();
 
@@ -333,6 +335,7 @@ function renderPlayerTotals(players) {
           <th>Rank</th>
           <th>Player</th>
           <th>Total Points</th>
+          <th>Matches Played</th>
           <th>Avg/Match</th>
           <th>Best Score</th>
           <th>Wins</th>
@@ -346,9 +349,65 @@ function renderPlayerTotals(players) {
                 <td class="table-rank">#${index + 1}</td>
                 <td>${player.name}</td>
                 <td>${formatPoints(player.total)}</td>
+                <td>${player.played}</td>
                 <td>${formatPoints(player.average)}</td>
                 <td>${formatPoints(player.best)}</td>
                 <td>${player.wins}</td>
+              </tr>
+            `,
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderWinsTable(matches) {
+  const wins = [];
+
+  matches.forEach((match) => {
+    if (match.completed && match.winner && match.winner !== "Pending") {
+      const winningAmount = match.totalPool - match.entryFee;
+      wins.push({
+        matchNo: match.matchNo,
+        match: match.match,
+        date: match.date,
+        winner: match.winner,
+        winningAmount: winningAmount,
+        winningScore: match.winningScore,
+      });
+    }
+  });
+
+  if (wins.length === 0) {
+    winsTableEl.innerHTML =
+      '<div class="empty-state">No wins recorded yet.</div>';
+    return;
+  }
+
+  winsTableEl.innerHTML = `
+    <table class="points-table">
+      <thead>
+        <tr>
+          <th>Match #</th>
+          <th>Match</th>
+          <th>Date</th>
+          <th>Winner</th>
+          <th>Winning Score</th>
+          <th>Prize Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${wins
+          .map(
+            (win) => `
+              <tr>
+                <td class="table-rank">#${win.matchNo}</td>
+                <td>${win.match}</td>
+                <td>${formatDate(win.date)}</td>
+                <td><strong>${win.winner}</strong></td>
+                <td>${formatPoints(win.winningScore)}</td>
+                <td class="positive">${formatCurrency(win.winningAmount)}</td>
               </tr>
             `,
           )
