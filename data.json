@@ -113,8 +113,14 @@
       "date": "2026-04-04",
       "time": "3:30 PM IST",
       "venue": "Arun Jaitley Stadium, Delhi",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 500.5,
+        "Abhishek": 762,
+        "Aman": 516,
+        "Vikki": 530.5,
+        "Vasu": 472.5
+      }
     },
     {
       "matchNo": 9,
@@ -122,8 +128,14 @@
       "date": "2026-04-04",
       "time": "7:30 PM IST",
       "venue": "Narendra Modi Stadium, Ahmedabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 906,
+        "Abhishek": 841.5,
+        "Aman": 799.5,
+        "Vikki": 838,
+        "Vasu": 866
+      }
     },
     {
       "matchNo": 10,
