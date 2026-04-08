@@ -195,8 +195,16 @@
       "date": "2026-04-06",
       "time": "7:30 PM IST",
       "venue": "Eden Gardens, Kolkata",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 0,
+        "Aman": 0,
+        "Vikki": 0,
+        "Vasu": 0,
+        "Akku": 0,
+        "Juhi": 0
+      }
     },
     {
       "matchNo": 13,
@@ -204,8 +212,16 @@
       "date": "2026-04-07",
       "time": "7:30 PM IST",
       "venue": "ACA Stadium, Guwahati",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 466,
+        "Aman": 622.5,
+        "Vikki": 572,
+        "Vasu": 0,
+        "Akku": 601.5,
+        "Juhi": 761
+      }
     },
     {
       "matchNo": 14,

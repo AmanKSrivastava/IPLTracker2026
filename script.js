@@ -9,6 +9,7 @@ const topLeaderEl = document.getElementById("topLeader");
 const topLeaderAmountEl = document.getElementById("topLeaderAmount");
 const entryFeeDisplayEl = document.getElementById("entryFeeDisplay");
 const playerTotalsEl = document.getElementById("playerTotals");
+const playerTotalsSummaryEl = document.getElementById("playerTotalsSummary");
 const winsTableEl = document.getElementById("winsTable");
 const completedOnlyToggleEl = document.getElementById("completedOnlyToggle");
 
@@ -82,9 +83,12 @@ function updateDashboard() {
 
   renderSummary(dashboardData, result);
   renderLeaderboard(result.balances, result.countedMatches.length > 0);
-  renderPlayerTotals(
-    calculatePlayerTotals(dashboardData.players, result.countedMatches),
+  const playerStats = calculatePlayerTotals(
+    dashboardData.players,
+    result.countedMatches,
   );
+  renderPlayerTotals(playerStats);
+  renderPlayerTotalsSummary(playerStats);
   renderWinsTable(result.matches);
   renderSettlement(result.balances, result.countedMatches.length > 0);
   renderMatches();
@@ -189,9 +193,11 @@ function processMatches(data, { completedOnly = true } = {}) {
 
   const processedMatches = data.matches.map((match, index) => {
     const scores = match.scores || {};
-    const activePlayers = Object.entries(scores).filter(
+    const allParticipants = Object.entries(scores);
+    const activePlayers = allParticipants.filter(
       ([, score]) => Number(score) > 0,
     );
+    const cancelled = allParticipants.length > 0 && activePlayers.length === 0;
     const entryFee = Number(match.entryFee ?? data.entryFee ?? 50);
     const completed = Boolean(match.completed);
 
@@ -199,7 +205,7 @@ function processMatches(data, { completedOnly = true } = {}) {
       completedCount += 1;
     }
 
-    let winner = completed ? "Pending" : "Upcoming";
+    let winner = cancelled ? "Cancelled" : completed ? "Pending" : "Upcoming";
     let winningScore = 0;
     let totalPool = 0;
 
@@ -213,9 +219,10 @@ function processMatches(data, { completedOnly = true } = {}) {
       totalPool = entryFee * activePlayers.length;
     }
 
-    const counted = activePlayers.length > 0 && (!completedOnly || completed);
+    const counted =
+      cancelled || (activePlayers.length > 0 && (!completedOnly || completed));
 
-    if (counted) {
+    if (counted && !cancelled) {
       activePlayers.forEach(([player]) => {
         if (player === winner) {
           balances[player] += totalPool - entryFee;
@@ -230,6 +237,7 @@ function processMatches(data, { completedOnly = true } = {}) {
       id: match.matchNo ?? index + 1,
       matchNo: match.matchNo ?? index + 1,
       completed,
+      cancelled,
       counted,
       entryFee,
       totalPool,
@@ -305,7 +313,7 @@ function calculatePlayerTotals(players, matches) {
       }
 
       totals[player].total += numericScore;
-      if (numericScore > 0) {
+      if (match.completed && !match.cancelled && numericScore > 0) {
         totals[player].played += 1;
       }
       totals[player].best = Math.max(totals[player].best, numericScore);
@@ -335,10 +343,8 @@ function renderPlayerTotals(players) {
           <th>Rank</th>
           <th>Player</th>
           <th>Total Points</th>
-          <th>Matches Played</th>
           <th>Avg/Match</th>
           <th>Best Score</th>
-          <th>Wins</th>
         </tr>
       </thead>
       <tbody>
@@ -349,9 +355,34 @@ function renderPlayerTotals(players) {
                 <td class="table-rank">#${index + 1}</td>
                 <td>${player.name}</td>
                 <td>${formatPoints(player.total)}</td>
-                <td>${player.played}</td>
                 <td>${formatPoints(player.average)}</td>
                 <td>${formatPoints(player.best)}</td>
+              </tr>
+            `,
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderPlayerTotalsSummary(players) {
+  playerTotalsSummaryEl.innerHTML = `
+    <table class="points-table">
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Matches Played</th>
+          <th>Wins</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${players
+          .map(
+            (player) => `
+              <tr>
+                <td>${player.name}</td>
+                <td>${player.played}</td>
                 <td>${player.wins}</td>
               </tr>
             `,
@@ -492,16 +523,16 @@ function renderMatches() {
   matchesEl.innerHTML = visibleMatches
     .map(
       (match) => `
-        <article class="match-card ${match.completed ? "is-completed" : "is-upcoming"}">
+        <article class="match-card ${match.cancelled ? "is-cancelled" : match.completed ? "is-completed" : "is-upcoming"}">
           <div class="match-topline">
             <div class="match-date">${formatDate(match.date)}</div>
-            <span class="chip status-chip ${match.completed ? "is-completed" : "is-upcoming"}">${match.completed ? "Completed" : "Upcoming"}</span>
+            <span class="chip status-chip ${match.cancelled ? "is-cancelled" : match.completed ? "is-completed" : "is-upcoming"}">${match.cancelled ? "Cancelled" : match.completed ? "Completed" : "Upcoming"}</span>
           </div>
           <h3>#${match.matchNo} • ${match.match}</h3>
           <div class="match-chip-row">
             <span class="chip">${match.time || "7:30 PM IST"}</span>
             <span class="chip">${match.venue || "Venue to be updated"}</span>
-            <span class="chip">${match.counted ? "Points counted" : "Not counted yet"}</span>
+            <span class="chip">${match.counted ? "Counted" : "Not counted yet"}</span>
           </div>
           <div class="match-stats">
             <div class="stat-box">
