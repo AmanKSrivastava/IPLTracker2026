@@ -19,6 +19,11 @@ let currentPage = 1;
 let showCompletedOnly = completedOnlyToggleEl?.checked ?? true;
 const matchesPerPage = 4;
 
+// Sort states for tables
+let playerTotalsSort = { field: "total", direction: "desc" };
+let playerTotalsSummarySort = { field: "name", direction: "asc" };
+let winsTableSort = { field: "matchNo", direction: "asc" };
+
 completedOnlyToggleEl?.addEventListener("change", () => {
   showCompletedOnly = completedOnlyToggleEl.checked;
   currentPage = 1;
@@ -87,9 +92,17 @@ function updateDashboard() {
     dashboardData.players,
     result.countedMatches,
   );
-  renderPlayerTotals(playerStats);
-  renderPlayerTotalsSummary(playerStats);
-  renderWinsTable(result.matches);
+  renderPlayerTotals(
+    playerStats,
+    playerTotalsSort.field,
+    playerTotalsSort.direction,
+  );
+  renderPlayerTotalsSummary(
+    playerStats,
+    playerTotalsSummarySort.field,
+    playerTotalsSummarySort.direction,
+  );
+  renderWinsTable(result.matches, winsTableSort.field, winsTableSort.direction);
   renderSettlement(result.balances, result.countedMatches.length > 0);
   renderMatches();
 
@@ -335,20 +348,37 @@ function calculatePlayerTotals(players, matches) {
     .sort((a, b) => b.total - a.total);
 }
 
-function renderPlayerTotals(players) {
+function renderPlayerTotals(
+  players,
+  sortField = "total",
+  sortDirection = "desc",
+) {
+  // Sort the players
+  const sortedPlayers = [...players].sort((a, b) => {
+    let aVal = a[sortField];
+    let bVal = b[sortField];
+
+    if (typeof aVal === "string") aVal = aVal.toLowerCase();
+    if (typeof bVal === "string") bVal = bVal.toLowerCase();
+
+    if (aVal < bVal) return sortDirection === "asc" ? -1 : 1;
+    if (aVal > bVal) return sortDirection === "asc" ? 1 : -1;
+    return 0;
+  });
+
   playerTotalsEl.innerHTML = `
-    <table class="points-table">
+    <table class="points-table" data-table="playerTotals">
       <thead>
         <tr>
           <th>Rank</th>
-          <th>Player</th>
-          <th>Total Points</th>
-          <th>Avg/Match</th>
-          <th>Best Score</th>
+          <th class="sortable" data-field="name">Player</th>
+          <th class="sortable" data-field="total">Total Points</th>
+          <th class="sortable" data-field="average">Avg/Match</th>
+          <th class="sortable" data-field="best">Best Score</th>
         </tr>
       </thead>
       <tbody>
-        ${players
+        ${sortedPlayers
           .map(
             (player, index) => `
               <tr>
@@ -364,20 +394,40 @@ function renderPlayerTotals(players) {
       </tbody>
     </table>
   `;
+
+  // Update sort indicators
+  updateSortIndicators("playerTotals", sortField, sortDirection);
 }
 
-function renderPlayerTotalsSummary(players) {
+function renderPlayerTotalsSummary(
+  players,
+  sortField = "name",
+  sortDirection = "asc",
+) {
+  // Sort the players
+  const sortedPlayers = [...players].sort((a, b) => {
+    let aVal = a[sortField];
+    let bVal = b[sortField];
+
+    if (typeof aVal === "string") aVal = aVal.toLowerCase();
+    if (typeof bVal === "string") bVal = bVal.toLowerCase();
+
+    if (aVal < bVal) return sortDirection === "asc" ? -1 : 1;
+    if (aVal > bVal) return sortDirection === "asc" ? 1 : -1;
+    return 0;
+  });
+
   playerTotalsSummaryEl.innerHTML = `
-    <table class="points-table">
+    <table class="points-table" data-table="playerTotalsSummary">
       <thead>
         <tr>
-          <th>Player</th>
-          <th>Matches Played</th>
-          <th>Wins</th>
+          <th class="sortable" data-field="name">Player</th>
+          <th class="sortable" data-field="played">Matches Played</th>
+          <th class="sortable" data-field="wins">Wins</th>
         </tr>
       </thead>
       <tbody>
-        ${players
+        ${sortedPlayers
           .map(
             (player) => `
               <tr>
@@ -391,9 +441,16 @@ function renderPlayerTotalsSummary(players) {
       </tbody>
     </table>
   `;
+
+  // Update sort indicators
+  updateSortIndicators("playerTotalsSummary", sortField, sortDirection);
 }
 
-function renderWinsTable(matches) {
+function renderWinsTable(
+  matches,
+  sortField = "matchNo",
+  sortDirection = "asc",
+) {
   const wins = [];
 
   matches.forEach((match) => {
@@ -416,20 +473,33 @@ function renderWinsTable(matches) {
     return;
   }
 
+  // Sort the wins
+  const sortedWins = [...wins].sort((a, b) => {
+    let aVal = a[sortField];
+    let bVal = b[sortField];
+
+    if (typeof aVal === "string") aVal = aVal.toLowerCase();
+    if (typeof bVal === "string") bVal = bVal.toLowerCase();
+
+    if (aVal < bVal) return sortDirection === "asc" ? -1 : 1;
+    if (aVal > bVal) return sortDirection === "asc" ? 1 : -1;
+    return 0;
+  });
+
   winsTableEl.innerHTML = `
-    <table class="points-table">
+    <table class="points-table" data-table="winsTable">
       <thead>
         <tr>
-          <th>Match #</th>
-          <th>Match</th>
-          <th>Date</th>
-          <th>Winner</th>
-          <th>Winning Score</th>
-          <th>Prize Amount</th>
+          <th class="sortable" data-field="matchNo">Match #</th>
+          <th class="sortable" data-field="match">Match</th>
+          <th class="sortable" data-field="date">Date</th>
+          <th class="sortable" data-field="winner">Winner</th>
+          <th class="sortable" data-field="winningScore">Winning Score</th>
+          <th class="sortable" data-field="winningAmount">Prize Amount</th>
         </tr>
       </thead>
       <tbody>
-        ${wins
+        ${sortedWins
           .map(
             (win) => `
               <tr>
@@ -446,6 +516,9 @@ function renderWinsTable(matches) {
       </tbody>
     </table>
   `;
+
+  // Update sort indicators
+  updateSortIndicators("winsTable", sortField, sortDirection);
 }
 
 function calculateSettlement(balances) {
@@ -642,3 +715,69 @@ function formatCurrency(amount) {
   const fixed = Number.isInteger(value) ? value.toFixed(0) : value.toFixed(2);
   return `₹${fixed}`;
 }
+
+// Table sorting functionality
+function updateSortIndicators(tableId, sortField, sortDirection) {
+  const table = document.querySelector(`[data-table="${tableId}"]`);
+  if (!table) return;
+
+  // Remove all sort classes
+  table.querySelectorAll("th.sortable").forEach((th) => {
+    th.classList.remove("sort-asc", "sort-desc");
+  });
+
+  // Add sort class to the active header
+  const activeTh = table.querySelector(`th[data-field="${sortField}"]`);
+  if (activeTh) {
+    activeTh.classList.add(`sort-${sortDirection}`);
+  }
+}
+
+function handleTableSort(event) {
+  const th = event.target.closest("th.sortable");
+  if (!th) return;
+
+  const table = th.closest("table");
+  const tableId = table.dataset.table;
+  const field = th.dataset.field;
+
+  let sortState;
+  if (tableId === "playerTotals") {
+    sortState = playerTotalsSort;
+  } else if (tableId === "playerTotalsSummary") {
+    sortState = playerTotalsSummarySort;
+  } else if (tableId === "winsTable") {
+    sortState = winsTableSort;
+  }
+
+  if (sortState.field === field) {
+    sortState.direction = sortState.direction === "asc" ? "desc" : "asc";
+  } else {
+    sortState.field = field;
+    sortState.direction = "asc";
+  }
+
+  // Re-render the table with new sort
+  if (tableId === "playerTotals") {
+    const playerStats = calculatePlayerTotals(
+      dashboardData.players,
+      allMatches.filter((m) => (showCompletedOnly ? m.completed : true)),
+    );
+    renderPlayerTotals(playerStats, sortState.field, sortState.direction);
+  } else if (tableId === "playerTotalsSummary") {
+    const playerStats = calculatePlayerTotals(
+      dashboardData.players,
+      allMatches.filter((m) => (showCompletedOnly ? m.completed : true)),
+    );
+    renderPlayerTotalsSummary(
+      playerStats,
+      sortState.field,
+      sortState.direction,
+    );
+  } else if (tableId === "winsTable") {
+    renderWinsTable(allMatches, sortState.field, sortState.direction);
+  }
+}
+
+// Add event listeners for table sorting
+document.addEventListener("click", handleTableSort);

@@ -404,6 +404,39 @@ body {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.points-table th.sortable:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.points-table th.sortable::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid var(--gold);
+  opacity: 0.3;
+}
+
+.points-table th.sortable.sort-asc::after {
+  border-bottom: 4px solid var(--gold);
+  border-top: none;
+  opacity: 1;
+}
+
+.points-table th.sortable.sort-desc::after {
+  border-top: 4px solid var(--gold);
+  border-bottom: none;
+  opacity: 1;
 }
 
 .points-table td {
