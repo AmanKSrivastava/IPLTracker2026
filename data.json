@@ -287,8 +287,17 @@
       "date": "2026-04-10",
       "time": "7:30 PM IST",
       "venue": "ACA Stadium, Guwahati",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 823,
+        "Abhishek": 614.5,
+        "Aman": 813,
+        "Vikki": 917.5,
+        "Vasu": 922.5,
+        "Akku": 1062,
+        "Juhi": 751,
+        "Isha": 753
+      }
     },
     {
       "matchNo": 17,
