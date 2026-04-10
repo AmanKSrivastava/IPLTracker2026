@@ -1,6 +1,15 @@
 {
   "entryFee": 50,
-  "players": ["Nabh", "Abhishek", "Aman", "Vikki", "Vasu", "Akku", "Juhi"],
+  "players": [
+    "Nabh",
+    "Abhishek",
+    "Aman",
+    "Vikki",
+    "Vasu",
+    "Akku",
+    "Juhi",
+    "Isha"
+  ],
   "matches": [
     {
       "matchNo": 1,
@@ -16,7 +25,8 @@
         "Vikki": 730.5,
         "Vasu": 0,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -33,7 +43,8 @@
         "Vikki": 810,
         "Vasu": 850,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -50,7 +61,8 @@
         "Vikki": 656,
         "Vasu": 0,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -67,7 +79,8 @@
         "Vikki": 572,
         "Vasu": 0,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -84,7 +97,8 @@
         "Vikki": 630,
         "Vasu": 0,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -101,7 +115,8 @@
         "Vikki": 652,
         "Vasu": 0,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -118,7 +133,8 @@
         "Vikki": 745.5,
         "Vasu": 735.5,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -135,7 +151,8 @@
         "Vikki": 530.5,
         "Vasu": 472.5,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -152,7 +169,8 @@
         "Vikki": 838,
         "Vasu": 866,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -169,7 +187,8 @@
         "Vikki": 561.5,
         "Vasu": 866,
         "Akku": 550,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -186,7 +205,8 @@
         "Vikki": 0,
         "Vasu": 471,
         "Akku": 665,
-        "Juhi": 676
+        "Juhi": 676,
+        "Isha": 0
       }
     },
     {
@@ -203,7 +223,8 @@
         "Vikki": 0,
         "Vasu": 0,
         "Akku": 0,
-        "Juhi": 0
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -220,7 +241,8 @@
         "Vikki": 572,
         "Vasu": 0,
         "Akku": 601.5,
-        "Juhi": 761
+        "Juhi": 761,
+        "Isha": 0
       }
     },
     {
@@ -229,8 +251,17 @@
       "date": "2026-04-08",
       "time": "7:30 PM IST",
       "venue": "Arun Jaitley Stadium, Delhi",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 852,
+        "Abhishek": 904,
+        "Aman": 888,
+        "Vikki": 795,
+        "Vasu": 884,
+        "Akku": 945,
+        "Juhi": 781,
+        "Isha": 900
+      }
     },
     {
       "matchNo": 15,
@@ -238,8 +269,17 @@
       "date": "2026-04-09",
       "time": "7:30 PM IST",
       "venue": "Eden Gardens, Kolkata",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 608,
+        "Abhishek": 488,
+        "Aman": 449.5,
+        "Vikki": 0,
+        "Vasu": 488.5,
+        "Akku": 585,
+        "Juhi": 510.5,
+        "Isha": 556.5
+      }
     },
     {
       "matchNo": 16,
