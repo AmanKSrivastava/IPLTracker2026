@@ -305,8 +305,17 @@
       "date": "2026-04-11",
       "time": "3:30 PM IST",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium, New Chandigarh",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 571.5,
+        "Abhishek": 944.5,
+        "Aman": 709.5,
+        "Vikki": 737.5,
+        "Vasu": 1040.5,
+        "Akku": 881.5,
+        "Juhi": 843.5,
+        "Isha": 848.5
+      }
     },
     {
       "matchNo": 18,
@@ -314,8 +323,17 @@
       "date": "2026-04-11",
       "time": "7:30 PM IST",
       "venue": "MA Chidambaram Stadium, Chennai",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 795.5,
+        "Aman": 941.5,
+        "Vikki": 797,
+        "Vasu": 960,
+        "Akku": 795,
+        "Juhi": 0,
+        "Isha": 765
+      }
     },
     {
       "matchNo": 19,
