@@ -341,8 +341,17 @@
       "date": "2026-04-12",
       "time": "3:30 PM IST",
       "venue": "Ekana Cricket Stadium, Lucknow",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 822,
+        "Abhishek": 872,
+        "Aman": 676.5,
+        "Vikki": 824.5,
+        "Vasu": 756,
+        "Akku": 752.5,
+        "Juhi": 734,
+        "Isha": 788
+      }
     },
     {
       "matchNo": 20,
@@ -350,8 +359,17 @@
       "date": "2026-04-12",
       "time": "7:30 PM IST",
       "venue": "Wankhede Stadium, Mumbai",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 883.5,
+        "Abhishek": 931,
+        "Aman": 1071.5,
+        "Vikki": 616.5,
+        "Vasu": 718.5,
+        "Akku": 878,
+        "Juhi": 0,
+        "Isha": 732.5
+      }
     },
     {
       "matchNo": 21,
