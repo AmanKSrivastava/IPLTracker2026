@@ -377,8 +377,17 @@
       "date": "2026-04-13",
       "time": "7:30 PM IST",
       "venue": "Rajiv Gandhi International Stadium, Hyderabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 709,
+        "Abhishek": 788,
+        "Aman": 754.5,
+        "Vikki": 593,
+        "Vasu": 656.5,
+        "Akku": 504,
+        "Juhi": 560,
+        "Isha": 259
+      }
     },
     {
       "matchNo": 22,
