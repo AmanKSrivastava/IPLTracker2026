@@ -10,6 +10,26 @@
     "Juhi",
     "Isha"
   ],
+  "manualPayments": [
+    {
+      "from": "Aman",
+      "to": "Vasu",
+      "amount": 200,
+      "description": "Manual payment"
+    },
+    {
+      "from": "Aman",
+      "to": "Abhishek",
+      "amount": 350,
+      "description": "Manual payment"
+    },
+    {
+      "from": "Aman",
+      "to": "Nabh",
+      "amount": 150,
+      "description": "Manual payment"
+    }
+  ],
   "matches": [
     {
       "matchNo": 1,

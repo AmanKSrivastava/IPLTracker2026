@@ -370,6 +370,28 @@ body {
   text-align: center;
 }
 
+.settlement.completed {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.1),
+    rgba(22, 163, 74, 0.1)
+  );
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.settlement-section {
+  margin-bottom: 20px;
+}
+
+.settlement-section h4 {
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .pay {
   color: var(--orange);
   font-weight: 700;

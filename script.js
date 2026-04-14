@@ -87,7 +87,11 @@ function updateDashboard() {
   });
 
   renderSummary(dashboardData, result);
-  renderLeaderboard(result.balances, result.countedMatches.length > 0);
+  renderLeaderboard(
+    result.balances,
+    result.originalBalances,
+    result.countedMatches.length > 0,
+  );
   const playerStats = calculatePlayerTotals(
     dashboardData.players,
     result.countedMatches,
@@ -126,6 +130,7 @@ function normalizeData(rawData) {
     return {
       entryFee: Number(rawData.entryFee ?? rawData.entry_fee ?? 50),
       players: Array.from(playerSet),
+      manualPayments: [],
       matches: rawData.map((match, index) => {
         const scores = match.scores || match.players || {};
 
@@ -161,6 +166,7 @@ function normalizeData(rawData) {
             ),
           ),
         ),
+      manualPayments: rawData.manualPayments || [],
       matches: rawData.matches.map((match, index) => {
         const scores = match.scores || match.players || {};
 
@@ -260,8 +266,27 @@ function processMatches(data, { completedOnly = true } = {}) {
     };
   });
 
+  // Store original balances before manual payments
+  const originalBalances = { ...balances };
+
+  // Apply manual payments to balances
+  if (data.manualPayments) {
+    data.manualPayments.forEach((payment) => {
+      if (
+        balances[payment.from] !== undefined &&
+        balances[payment.to] !== undefined
+      ) {
+        // Reduce the sender's debt (or increase their credit)
+        balances[payment.from] += payment.amount;
+        // Increase the receiver's debt (or reduce their credit)
+        balances[payment.to] -= payment.amount;
+      }
+    });
+  }
+
   return {
-    balances,
+    balances, // adjusted balances
+    originalBalances, // balances before manual payments
     matches: processedMatches,
     countedMatches: processedMatches.filter((match) => match.counted),
     completedCount,
@@ -270,7 +295,9 @@ function processMatches(data, { completedOnly = true } = {}) {
 }
 
 function renderSummary(data, result) {
-  const sorted = Object.entries(result.balances).sort((a, b) => b[1] - a[1]);
+  const sorted = Object.entries(result.originalBalances).sort(
+    (a, b) => b[1] - a[1],
+  );
   const hasCountedMatches = result.countedMatches.length > 0;
   const [leaderName, leaderAmount] = sorted[0] || ["-", 0];
 
@@ -283,30 +310,68 @@ function renderSummary(data, result) {
   entryFeeDisplayEl.textContent = formatCurrency(data.entryFee ?? 0);
 }
 
-function renderLeaderboard(balances, hasCountedMatches) {
-  const sorted = Object.entries(balances).sort((a, b) => b[1] - a[1]);
-  const rows = sorted
-    .map(
-      ([name, balance], index) => `
-        <div class="leader-row">
-          <div class="leader-user">
-            <span class="rank-badge">${index + 1}</span>
-            <div>
-              <span class="leader-name">${name}</span>
-              <span class="leader-note">${balance === 0 ? "Neutral" : balance > 0 ? "In profit" : "Needs recovery"}</span>
-            </div>
-          </div>
-          <span class="amount ${balance >= 0 ? "positive" : "negative"}">${formatCurrency(balance)}</span>
-        </div>
-      `,
-    )
-    .join("");
+function renderLeaderboard(balances, originalBalances, hasCountedMatches) {
+  // Calculate manual settlements for each player
+  const manualSettlements = {};
+  if (dashboardData.manualPayments) {
+    dashboardData.manualPayments.forEach((payment) => {
+      // What each player has collected
+      if (!manualSettlements[payment.to]) {
+        manualSettlements[payment.to] = { collected: 0, paid: 0 };
+      }
+      manualSettlements[payment.to].collected += payment.amount;
 
-  leaderboardEl.innerHTML =
-    (hasCountedMatches
-      ? ""
-      : '<div class="empty-state">Completed scores will appear here as matches finish.</div>') +
-    rows;
+      // What each player has paid
+      if (!manualSettlements[payment.from]) {
+        manualSettlements[payment.from] = { collected: 0, paid: 0 };
+      }
+      manualSettlements[payment.from].paid += payment.amount;
+    });
+  }
+
+  const sorted = Object.entries(originalBalances).sort((a, b) => b[1] - a[1]);
+
+  leaderboardEl.innerHTML = `
+    <table class="points-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Total Profit/Loss</th>
+          <th>Collected/Paid</th>
+          <th>Remaining</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${sorted
+          .map(([name, originalBalance], index) => {
+            const settlement = manualSettlements[name] || {
+              collected: 0,
+              paid: 0,
+            };
+            const netSettled = settlement.collected - settlement.paid;
+            const remaining = balances[name] || 0;
+
+            return `
+              <tr>
+                <td class="table-rank">#${index + 1}</td>
+                <td>${name}</td>
+                <td class="${originalBalance >= 0 ? "positive" : "negative"}">${formatCurrency(originalBalance)}</td>
+                <td class="${netSettled >= 0 ? "positive" : "negative"}">${netSettled === 0 ? "-" : formatCurrency(netSettled)}</td>
+                <td class="${remaining >= 0 ? "positive" : "negative"}">${remaining === 0 ? "Settled" : formatCurrency(remaining)}</td>
+              </tr>
+            `;
+          })
+          .join("")}
+      </tbody>
+    </table>
+  `;
+
+  // If no counted matches, show empty state
+  if (!hasCountedMatches) {
+    leaderboardEl.innerHTML =
+      '<div class="empty-state">Completed scores will appear here as matches finish.</div>';
+  }
 }
 
 function calculatePlayerTotals(players, matches) {
@@ -563,21 +628,47 @@ function renderSettlement(balances, hasCountedMatches) {
   }
 
   const transactions = calculateSettlement(balances);
+  const manualPayments = dashboardData.manualPayments || [];
 
-  settlementEl.innerHTML =
-    transactions.length === 0
-      ? '<div class="settlement">All settled 🎉</div>'
-      : transactions
-          .map(
-            (transaction) => `
-              <div class="settlement">
-                <span class="pay">${transaction.from}</span>
-                pays ${formatCurrency(transaction.amount)} to
-                <span class="receive">${transaction.to}</span>
-              </div>
-            `,
-          )
-          .join("");
+  let settlementHTML = "";
+
+  // Show manual payments that have been made
+  if (manualPayments.length > 0) {
+    settlementHTML +=
+      '<div class="settlement-section"><h4>✅ Already Paid</h4>';
+    manualPayments.forEach((payment) => {
+      settlementHTML += `
+        <div class="settlement completed">
+          <span class="pay">${payment.from}</span>
+          paid ${formatCurrency(payment.amount)} to
+          <span class="receive">${payment.to}</span>
+        </div>
+      `;
+    });
+    settlementHTML += "</div>";
+  }
+
+  // Show remaining transactions
+  if (transactions.length === 0) {
+    settlementHTML += '<div class="settlement">All settled 🎉</div>';
+  } else {
+    settlementHTML +=
+      '<div class="settlement-section"><h4>💰 Remaining Payments</h4>';
+    settlementHTML += transactions
+      .map(
+        (transaction) => `
+          <div class="settlement">
+            <span class="pay">${transaction.from}</span>
+            pays ${formatCurrency(transaction.amount)} to
+            <span class="receive">${transaction.to}</span>
+          </div>
+        `,
+      )
+      .join("");
+    settlementHTML += "</div>";
+  }
+
+  settlementEl.innerHTML = settlementHTML;
 }
 
 function renderMatches() {
