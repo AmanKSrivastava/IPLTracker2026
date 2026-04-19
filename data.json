@@ -487,8 +487,17 @@
       "date": "2026-04-18",
       "time": "3:30 PM IST",
       "venue": "M. Chinnaswamy Stadium, Bengaluru",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 783.5,
+        "Abhishek": 653.5,
+        "Aman": 682,
+        "Vikki": 899.5,
+        "Vasu": 879.5,
+        "Akku": 0,
+        "Juhi": 0,
+        "Isha": 764.5
+      }
     },
     {
       "matchNo": 27,
@@ -496,8 +505,17 @@
       "date": "2026-04-18",
       "time": "7:30 PM IST",
       "venue": "Rajiv Gandhi International Stadium, Hyderabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 809.5,
+        "Abhishek": 919,
+        "Aman": 888.5,
+        "Vikki": 880.5,
+        "Vasu": 835.5,
+        "Akku": 895.5,
+        "Juhi": 0,
+        "Isha": 0
+      }
     },
     {
       "matchNo": 28,
