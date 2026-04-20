@@ -523,8 +523,17 @@
       "date": "2026-04-19",
       "time": "3:30 PM IST",
       "venue": "Eden Gardens, Kolkata",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 653,
+        "Aman": 545,
+        "Vikki": 723.5,
+        "Vasu": 725.5,
+        "Akku": 760,
+        "Juhi": 782,
+        "Isha": 760
+      }
     },
     {
       "matchNo": 29,
@@ -532,8 +541,17 @@
       "date": "2026-04-19",
       "time": "7:30 PM IST",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium, New Chandigarh",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 896.5,
+        "Abhishek": 976.5,
+        "Aman": 898,
+        "Vikki": 959,
+        "Vasu": 839,
+        "Akku": 1086,
+        "Juhi": 890,
+        "Isha": 774.5
+      }
     },
     {
       "matchNo": 30,
