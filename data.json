@@ -559,8 +559,17 @@
       "date": "2026-04-20",
       "time": "7:30 PM IST",
       "venue": "Narendra Modi Stadium, Ahmedabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 677.5,
+        "Abhishek": 0,
+        "Aman": 465.5,
+        "Vikki": 581,
+        "Vasu": 0,
+        "Akku": 584.5,
+        "Juhi": 0,
+        "Isha": 572.5
+      }
     },
     {
       "matchNo": 31,
@@ -568,8 +577,17 @@
       "date": "2026-04-21",
       "time": "7:30 PM IST",
       "venue": "Rajiv Gandhi International Stadium, Hyderabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 847.5,
+        "Abhishek": 804.5,
+        "Aman": 989.5,
+        "Vikki": 1016.5,
+        "Vasu": 737.5,
+        "Akku": 934.5,
+        "Juhi": 1184.5,
+        "Isha": 758.5
+      }
     },
     {
       "matchNo": 32,
