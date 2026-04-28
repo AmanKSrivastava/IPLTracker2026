@@ -596,7 +596,16 @@
       "time": "7:30 PM IST",
       "venue": "Ekana Cricket Stadium, Lucknow",
       "completed": false,
-      "scores": {}
+      "scores": {
+        "Nabh": 847.5,
+        "Abhishek": 804.5,
+        "Aman": 989.5,
+        "Vikki": 1016.5,
+        "Vasu": 737.5,
+        "Akku": 934.5,
+        "Juhi": 1184.5,
+        "Isha": 758.5
+      }
     },
     {
       "matchNo": 33,
@@ -604,8 +613,17 @@
       "date": "2026-04-23",
       "time": "7:30 PM IST",
       "venue": "Wankhede Stadium, Mumbai",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 761,
+        "Aman": 831.5,
+        "Vikki": 851.5,
+        "Vasu": 761.5,
+        "Akku": 888,
+        "Juhi": 926,
+        "Isha": 763.5
+      }
     },
     {
       "matchNo": 34,
@@ -613,8 +631,17 @@
       "date": "2026-04-24",
       "time": "7:30 PM IST",
       "venue": "M. Chinnaswamy Stadium, Bengaluru",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 843.5,
+        "Aman": 901,
+        "Vikki": 830.5,
+        "Vasu": 0,
+        "Akku": 0,
+        "Juhi": 676.5,
+        "Isha": 763.5
+      }
     },
     {
       "matchNo": 35,
@@ -622,8 +649,17 @@
       "date": "2026-04-25",
       "time": "3:30 PM IST",
       "venue": "Arun Jaitley Stadium, Delhi",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 958,
+        "Aman": 793,
+        "Vikki": 1087,
+        "Vasu": 0,
+        "Akku": 0,
+        "Juhi": 1220,
+        "Isha": 0
+      }
     },
     {
       "matchNo": 36,
@@ -631,8 +667,17 @@
       "date": "2026-04-25",
       "time": "7:30 PM IST",
       "venue": "Sawai Mansingh Stadium, Jaipur",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 1075,
+        "Aman": 1152,
+        "Vikki": 1276.5,
+        "Vasu": 0,
+        "Akku": 0,
+        "Juhi": 974,
+        "Isha": 0
+      }
     },
     {
       "matchNo": 37,
@@ -640,8 +685,17 @@
       "date": "2026-04-26",
       "time": "3:30 PM IST",
       "venue": "Narendra Modi Stadium, Ahmedabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 740.5,
+        "Abhishek": 857,
+        "Aman": 674,
+        "Vikki": 783.5,
+        "Vasu": 812.5,
+        "Akku": 0,
+        "Juhi": 786.5,
+        "Isha": 0
+      }
     },
     {
       "matchNo": 38,
@@ -649,8 +703,17 @@
       "date": "2026-04-26",
       "time": "7:30 PM IST",
       "venue": "Ekana Cricket Stadium, Lucknow",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 913,
+        "Abhishek": 710,
+        "Aman": 767.5,
+        "Vikki": 518,
+        "Vasu": 0,
+        "Akku": 865,
+        "Juhi": 567,
+        "Isha": 0
+      }
     },
     {
       "matchNo": 39,
@@ -658,8 +721,17 @@
       "date": "2026-04-27",
       "time": "7:30 PM IST",
       "venue": "Arun Jaitley Stadium, Delhi",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 626.5,
+        "Abhishek": 487.5,
+        "Aman": 419.5,
+        "Vikki": 592.5,
+        "Vasu": 0,
+        "Akku": 630.5,
+        "Juhi": 538.5,
+        "Isha": 0
+      }
     },
     {
       "matchNo": 40,
@@ -667,8 +739,17 @@
       "date": "2026-04-28",
       "time": "7:30 PM IST",
       "venue": "Maharaja Yadavindra Singh International Cricket Stadium, New Chandigarh",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 778.5,
+        "Abhishek": 739.5,
+        "Aman": 884.5,
+        "Vikki": 805,
+        "Vasu": 0,
+        "Akku": 790.5,
+        "Juhi": 756.5,
+        "Isha": 629.5
+      }
     },
     {
       "matchNo": 41,
