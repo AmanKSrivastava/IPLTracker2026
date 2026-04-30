@@ -757,8 +757,17 @@
       "date": "2026-04-29",
       "time": "7:30 PM IST",
       "venue": "Wankhede Stadium, Mumbai",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 678.5,
+        "Abhishek": 1273.5,
+        "Aman": 1189.5,
+        "Vikki": 1236.5,
+        "Vasu": 0,
+        "Akku": 981,
+        "Juhi": 984.5,
+        "Isha": 0
+      }
     },
     {
       "matchNo": 42,
@@ -766,8 +775,17 @@
       "date": "2026-04-30",
       "time": "7:30 PM IST",
       "venue": "Narendra Modi Stadium, Ahmedabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 725,
+        "Abhishek": 890.5,
+        "Aman": 825,
+        "Vikki": 805,
+        "Vasu": 793,
+        "Akku": 0,
+        "Juhi": 854,
+        "Isha": 768.5
+      }
     },
     {
       "matchNo": 43,
