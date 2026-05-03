@@ -793,8 +793,17 @@
       "date": "2026-05-01",
       "time": "7:30 PM IST",
       "venue": "Sawai Mansingh Stadium, Jaipur",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 848,
+        "Abhishek": 772.5,
+        "Aman": 1008.5,
+        "Vikki": 661.5,
+        "Vasu": 0,
+        "Akku": 705,
+        "Juhi": 627,
+        "Isha": 0
+      }
     },
     {
       "matchNo": 44,
@@ -802,8 +811,17 @@
       "date": "2026-05-02",
       "time": "7:30 PM IST",
       "venue": "MA Chidambaram Stadium, Chennai",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 633.5,
+        "Abhishek": 657.5,
+        "Aman": 758.5,
+        "Vikki": 746.5,
+        "Vasu": 616.5,
+        "Akku": 710.5,
+        "Juhi": 0,
+        "Isha": 475
+      }
     },
     {
       "matchNo": 45,
