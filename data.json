@@ -595,16 +595,16 @@
       "date": "2026-04-22",
       "time": "7:30 PM IST",
       "venue": "Ekana Cricket Stadium, Lucknow",
-      "completed": false,
+      "completed": true,
       "scores": {
-        "Nabh": 847.5,
-        "Abhishek": 804.5,
-        "Aman": 989.5,
-        "Vikki": 1016.5,
-        "Vasu": 737.5,
-        "Akku": 934.5,
-        "Juhi": 1184.5,
-        "Isha": 758.5
+        "Nabh": 731.4,
+        "Abhishek": 754.5,
+        "Aman": 751.9,
+        "Vikki": 742.5,
+        "Vasu": 0,
+        "Akku": 750.5,
+        "Juhi": 740.5,
+        "Isha": 0
       }
     },
     {
@@ -829,8 +829,17 @@
       "date": "2026-05-03",
       "time": "3:30 PM IST",
       "venue": "Rajiv Gandhi International Stadium, Hyderabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 857.5,
+        "Abhishek": 745.5,
+        "Aman": 899,
+        "Vikki": 794.5,
+        "Vasu": 842.5,
+        "Akku": 824,
+        "Juhi": 810.5,
+        "Isha": 730.5
+      }
     },
     {
       "matchNo": 46,
@@ -838,8 +847,17 @@
       "date": "2026-05-03",
       "time": "7:30 PM IST",
       "venue": "Narendra Modi Stadium, Ahmedabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 0,
+        "Abhishek": 782.5,
+        "Aman": 687,
+        "Vikki": 743,
+        "Vasu": 700,
+        "Akku": 724.5,
+        "Juhi": 0,
+        "Isha": 800.5
+      }
     },
     {
       "matchNo": 47,
