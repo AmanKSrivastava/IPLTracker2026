@@ -865,26 +865,53 @@
       "date": "2026-05-04",
       "time": "7:30 PM IST",
       "venue": "Wankhede Stadium, Mumbai",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 751,
+        "Abhishek": 956,
+        "Aman": 1005.5,
+        "Vikki": 1012,
+        "Vasu": 990.5,
+        "Akku": 922.5,
+        "Juhi": 707,
+        "Isha": 995.5
+      }
     },
     {
       "matchNo": 48,
-      "match": "Rajasthan Royals vs Sunrisers Hyderabad",
+      "match": "Delhi Capitals vs Chennai Super Kings",
       "date": "2026-05-05",
       "time": "7:30 PM IST",
-      "venue": "Sawai Mansingh Stadium, Jaipur",
-      "completed": false,
-      "scores": {}
+      "venue": "Arun Jaitley Stadium, Delhi",
+      "completed": true,
+      "scores": {
+        "Nabh": 557.5,
+        "Abhishek": 536.5,
+        "Aman": 737.5,
+        "Vikki": 678.5,
+        "Vasu": 0,
+        "Akku": 698,
+        "Juhi": 0,
+        "Isha": 602.5
+      }
     },
     {
       "matchNo": 49,
-      "match": "Gujarat Titans vs Chennai Super Kings",
+      "match": "Sunrisers Hyderabad vs Punjab Kings",
       "date": "2026-05-06",
       "time": "7:30 PM IST",
-      "venue": "Narendra Modi Stadium, Ahmedabad",
-      "completed": false,
-      "scores": {}
+      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
+      "completed": true,
+      "scores": {
+        "Nabh": 1034.5,
+        "Abhishek": 813.5,
+        "Aman": 1093.5,
+        "Vikki": 963,
+        "Vasu": 880.5,
+        "Akku": 873.5,
+        "Juhi": 869.5,
+        "Isha": 908.5
+      }
     },
     {
       "matchNo": 50,
