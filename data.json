@@ -915,21 +915,39 @@
     },
     {
       "matchNo": 50,
-      "match": "Lucknow Super Giants vs Kolkata Knight Riders",
+      "match": "Lucknow Super Giants vs Royal Challengers Bengaluru",
       "date": "2026-05-07",
       "time": "7:30 PM IST",
       "venue": "Ekana Cricket Stadium, Lucknow",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 766.5,
+        "Abhishek": 902,
+        "Aman": 805,
+        "Vikki": 1153.5,
+        "Vasu": 0,
+        "Akku": 1112,
+        "Juhi": 0,
+        "Isha": 633
+      }
     },
     {
       "matchNo": 51,
-      "match": "Delhi Capitals vs Royal Challengers Bengaluru",
+      "match": "Delhi Capitals vs Kolkata Knight Riders",
       "date": "2026-05-08",
       "time": "7:30 PM IST",
       "venue": "Arun Jaitley Stadium, Delhi",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 608.5,
+        "Abhishek": 509.5,
+        "Aman": 825.5,
+        "Vikki": 500,
+        "Vasu": 0,
+        "Akku": 696,
+        "Juhi": 0,
+        "Isha": 0
+      }
     },
     {
       "matchNo": 52,
