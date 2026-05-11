@@ -951,30 +951,57 @@
     },
     {
       "matchNo": 52,
-      "match": "Punjab Kings vs Rajasthan Royals",
+      "match": "Gujarat Titans vs Rajasthan Royals",
       "date": "2026-05-09",
       "time": "7:30 PM IST",
-      "venue": "Maharaja Yadavindra Singh International Cricket Stadium, New Chandigarh",
-      "completed": false,
-      "scores": {}
+      "venue": "Sawai Mansingh Stadium, Jaipur",
+      "completed": true,
+      "scores": {
+        "Nabh": 984.5,
+        "Abhishek": 742,
+        "Aman": 0,
+        "Vikki": 0,
+        "Vasu": 1036.5,
+        "Akku": 839.5,
+        "Juhi": 1030.5,
+        "Isha": 986
+      }
     },
     {
       "matchNo": 53,
-      "match": "Mumbai Indians vs Sunrisers Hyderabad",
+      "match": "Chennai Super Kings vs Lucknow Super Giants",
       "date": "2026-05-10",
       "time": "3:30 PM IST",
-      "venue": "Wankhede Stadium, Mumbai",
-      "completed": false,
-      "scores": {}
+      "venue": "MA Chidambaram Stadium, Chennai",
+      "completed": true,
+      "scores": {
+        "Nabh": 564.5,
+        "Abhishek": 1020,
+        "Aman": 797.5,
+        "Vikki": 549,
+        "Vasu": 932,
+        "Akku": 579,
+        "Juhi": 0,
+        "Isha": 561
+      }
     },
     {
       "matchNo": 54,
-      "match": "Gujarat Titans vs Royal Challengers Bengaluru",
+      "match": "Mumbai Indians vs Royal Challengers Bengaluru",
       "date": "2026-05-10",
       "time": "7:30 PM IST",
       "venue": "Narendra Modi Stadium, Ahmedabad",
-      "completed": false,
-      "scores": {}
+      "completed": true,
+      "scores": {
+        "Nabh": 866,
+        "Abhishek": 538.5,
+        "Aman": 572,
+        "Vikki": 809,
+        "Vasu": 0,
+        "Akku": 679,
+        "Juhi": 630,
+        "Isha": 725
+      }
     },
     {
       "matchNo": 55,
