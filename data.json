@@ -1005,48 +1005,93 @@
     },
     {
       "matchNo": 55,
-      "match": "Rajasthan Royals vs Delhi Capitals",
+      "match": "Punjab Kings vs Delhi Capitals",
       "date": "2026-05-11",
       "time": "7:30 PM IST",
-      "venue": "Sawai Mansingh Stadium, Jaipur",
-      "completed": false,
-      "scores": {}
+      "venue": "HPCA Stadium, Dharamshala",
+      "completed": true,
+      "scores": {
+        "Nabh": 684.5,
+        "Abhishek": 681.5,
+        "Aman": 705.5,
+        "Vikki": 675,
+        "Vasu": 0,
+        "Akku": 794,
+        "Juhi": 0,
+        "Isha": 885
+      }
     },
     {
       "matchNo": 56,
-      "match": "Chennai Super Kings vs Mumbai Indians",
+      "match": "Gujarat Titans vs Sunrisers Hyderabad",
       "date": "2026-05-12",
       "time": "7:30 PM IST",
-      "venue": "MA Chidambaram Stadium, Chennai",
-      "completed": false,
-      "scores": {}
+      "venue": "Narendra Modi Stadium, Ahmedabad",
+      "completed": true,
+      "scores": {
+        "Nabh": 658,
+        "Abhishek": 627,
+        "Aman": 503.5,
+        "Vikki": 674.5,
+        "Vasu": 825.5,
+        "Akku": 618,
+        "Juhi": 732.5,
+        "Isha": 682.5
+      }
     },
     {
       "matchNo": 57,
-      "match": "Sunrisers Hyderabad vs Kolkata Knight Riders",
+      "match": "Royal Challengers Bengaluru vs Kolkata Knight Riders",
       "date": "2026-05-13",
       "time": "7:30 PM IST",
-      "venue": "Rajiv Gandhi International Stadium, Hyderabad",
-      "completed": false,
-      "scores": {}
+      "venue": "Shaheed Veer Narayan Singh International Cricket Stadium, Raipur",
+      "completed": true,
+      "scores": {
+        "Nabh": 810.5,
+        "Abhishek": 1013,
+        "Aman": 784,
+        "Vikki": 0,
+        "Vasu": 0,
+        "Akku": 740,
+        "Juhi": 935.5,
+        "Isha": 495
+      }
     },
     {
       "matchNo": 58,
-      "match": "Gujarat Titans vs Punjab Kings",
+      "match": "Mumbai Indians vs Punjab Kings",
       "date": "2026-05-14",
       "time": "7:30 PM IST",
-      "venue": "Narendra Modi Stadium, Ahmedabad",
-      "completed": false,
-      "scores": {}
+      "venue": "HPCA Stadium, Dharamshala",
+      "completed": true,
+      "scores": {
+        "Nabh": 742.5,
+        "Abhishek": 941.5,
+        "Aman": 638.5,
+        "Vikki": 965,
+        "Vasu": 874.5,
+        "Akku": 767.5,
+        "Juhi": 579.5,
+        "Isha": 751
+      }
     },
     {
       "matchNo": 59,
-      "match": "Mumbai Indians vs Lucknow Super Giants",
+      "match": "Chennai Super Kings vs Lucknow Super Giants",
       "date": "2026-05-15",
       "time": "7:30 PM IST",
-      "venue": "Wankhede Stadium, Mumbai",
+      "venue": "Ekana Cricket Stadium, Lucknow",
       "completed": false,
-      "scores": {}
+      "scores": {
+        "Nabh": 866,
+        "Abhishek": 538.5,
+        "Aman": 572,
+        "Vikki": 809,
+        "Vasu": 0,
+        "Akku": 679,
+        "Juhi": 630,
+        "Isha": 725
+      }
     },
     {
       "matchNo": 60,
