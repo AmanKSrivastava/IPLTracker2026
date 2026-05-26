@@ -1243,16 +1243,16 @@
       "date": "2026-05-23",
       "time": "7:30 PM IST",
       "venue": "Ekana Cricket Stadium, Lucknow",
-      "completed": false,
+      "completed": true,
       "scores": {
-        "Nabh": 866,
-        "Abhishek": 538.5,
-        "Aman": 572,
-        "Vikki": 809,
+        "Nabh": 715,
+        "Abhishek": 672,
+        "Aman": 1083.5,
+        "Vikki": 964,
         "Vasu": 0,
-        "Akku": 679,
-        "Juhi": 630,
-        "Isha": 725
+        "Akku": 837,
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -1261,16 +1261,16 @@
       "date": "2026-05-24",
       "time": "3:30 PM IST",
       "venue": "Wankhede Stadium, Mumbai",
-      "completed": false,
+      "completed": true,
       "scores": {
-        "Nabh": 866,
-        "Abhishek": 538.5,
-        "Aman": 572,
-        "Vikki": 809,
+        "Nabh": 734,
+        "Abhishek": 600,
+        "Aman": 0,
+        "Vikki": 762,
         "Vasu": 0,
-        "Akku": 679,
-        "Juhi": 630,
-        "Isha": 725
+        "Akku": 0,
+        "Juhi": 0,
+        "Isha": 0
       }
     },
     {
@@ -1279,16 +1279,16 @@
       "date": "2026-05-24",
       "time": "7:30 PM IST",
       "venue": "Eden Gardens, Kolkata",
-      "completed": false,
+      "completed": true,
       "scores": {
-        "Nabh": 866,
-        "Abhishek": 538.5,
-        "Aman": 572,
-        "Vikki": 809,
+        "Nabh": 738,
+        "Abhishek": 556,
+        "Aman": 696.5,
+        "Vikki": 824,
         "Vasu": 0,
-        "Akku": 679,
-        "Juhi": 630,
-        "Isha": 725
+        "Akku": 0,
+        "Juhi": 0,
+        "Isha": 815.5
       }
     }
   ]
