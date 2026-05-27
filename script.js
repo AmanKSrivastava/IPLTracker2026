@@ -117,6 +117,22 @@ function updateDashboard() {
   statusEl.textContent = `Loaded ${result.totalScheduled} scheduled matches • ${result.completedCount} completed • scoring uses ${modeText}.`;
 }
 
+function resolveEntryFee(matchNo, matchEntryFee, defaultFee = 50) {
+  if (typeof matchEntryFee === "number" && !Number.isNaN(matchEntryFee)) {
+    return matchEntryFee;
+  }
+
+  if (matchNo >= 71 && matchNo <= 73) {
+    return 100;
+  }
+
+  if (matchNo === 74) {
+    return 200;
+  }
+
+  return defaultFee;
+}
+
 function normalizeData(rawData) {
   if (Array.isArray(rawData)) {
     const playerSet = new Set();
@@ -133,13 +149,11 @@ function normalizeData(rawData) {
       manualPayments: [],
       matches: rawData.map((match, index) => {
         const scores = match.scores || match.players || {};
+        const matchNo = Number(match.matchNo ?? match.match_no ?? index + 1);
 
         return {
-          matchNo: Number(match.matchNo ?? match.match_no ?? index + 1),
-          match:
-            match.match ||
-            match.match_between ||
-            `Match ${match.matchNo ?? match.match_no ?? index + 1}`,
+          matchNo,
+          match: match.match || match.match_between || `Match ${matchNo}`,
           date: match.date || "",
           time: match.time || "7:30 PM IST",
           venue: match.venue || "Venue to be updated",
@@ -147,7 +161,11 @@ function normalizeData(rawData) {
             typeof match.completed === "boolean"
               ? match.completed
               : hasScoreData(scores),
-          entryFee: Number(match.entryFee ?? match.entry_fee ?? 50),
+          entryFee: resolveEntryFee(
+            matchNo,
+            Number(match.entryFee ?? match.entry_fee),
+            50,
+          ),
           scores,
         };
       }),
@@ -169,13 +187,11 @@ function normalizeData(rawData) {
       manualPayments: rawData.manualPayments || [],
       matches: rawData.matches.map((match, index) => {
         const scores = match.scores || match.players || {};
+        const matchNo = Number(match.matchNo ?? match.match_no ?? index + 1);
 
         return {
-          matchNo: Number(match.matchNo ?? match.match_no ?? index + 1),
-          match:
-            match.match ||
-            match.match_between ||
-            `Match ${match.matchNo ?? match.match_no ?? index + 1}`,
+          matchNo,
+          match: match.match || match.match_between || `Match ${matchNo}`,
           date: match.date || "",
           time: match.time || "7:30 PM IST",
           venue: match.venue || "Venue to be updated",
@@ -183,12 +199,10 @@ function normalizeData(rawData) {
             typeof match.completed === "boolean"
               ? match.completed
               : hasScoreData(scores),
-          entryFee: Number(
-            match.entryFee ??
-              match.entry_fee ??
-              rawData.entryFee ??
-              rawData.entry_fee ??
-              50,
+          entryFee: resolveEntryFee(
+            matchNo,
+            Number(match.entryFee ?? match.entry_fee),
+            Number(rawData.entryFee ?? rawData.entry_fee ?? 50),
           ),
           scores,
         };
