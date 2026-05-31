@@ -1308,6 +1308,60 @@
         "Juhi": 852.5,
         "Isha": 854.5
       }
+    },
+    {
+      "matchNo": 72,
+      "match": "Rajasthan Royals vs Sunrisers Hyderabad",
+      "date": "2026-05-27",
+      "time": "7:30 PM IST",
+      "venue": "Maharaja Yadavindra Singh International Cricket Stadium, New Chandigarh",
+      "completed": true,
+      "scores": {
+        "Nabh": 1025.5,
+        "Abhishek": 1119.5,
+        "Aman": 748,
+        "Vikki": 1109.5,
+        "Vasu": 962,
+        "Akku": 889.5,
+        "Juhi": 0,
+        "Isha": 1102.5
+      }
+    },
+    {
+      "matchNo": 73,
+      "match": "Gujarat Titans vs Rajasthan Royals",
+      "date": "2026-05-29",
+      "time": "7:30 PM IST",
+      "venue": "Maharaja Yadavindra Singh International Cricket Stadium, New Chandigarh",
+      "completed": true,
+      "scores": {
+        "Nabh": 1068.5,
+        "Abhishek": 683,
+        "Aman": 721,
+        "Vikki": 1153,
+        "Vasu": 973.5,
+        "Akku": 1113.5,
+        "Juhi": 0,
+        "Isha": 1189
+      }
+    },
+    {
+      "matchNo": 74,
+      "match": "Royal Challengers Bengaluru vs Gujarat Titans",
+      "date": "2026-05-31",
+      "time": "7:30 PM IST",
+      "venue": "Narendra Modi Stadium, Ahmedabad",
+      "completed": true,
+      "scores": {
+        "Nabh": 698.5,
+        "Abhishek": 679.5,
+        "Aman": 792.5,
+        "Vikki": 539.5,
+        "Vasu": 689.5,
+        "Akku": 630.5,
+        "Juhi": 0,
+        "Isha": 776
+      }
     }
   ]
 }
